@@ -1,0 +1,1 @@
+# DIAMANTES_RES
