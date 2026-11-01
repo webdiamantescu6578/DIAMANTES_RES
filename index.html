@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Diamantes_Res</title>
+<style>
+:root{--bg:#0e0e1a;--card:#16162a;--card2:#1d1d36;--text:#fff;--muted:#9a9ab5;--accent:#8b5cf6;--accent2:#a855f7;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--border:#2a2a45;--input:#0a0a14}
+[data-theme="light"]{--bg:#f3f3fa;--card:#fff;--card2:#f7f7fd;--text:#16162a;--muted:#666680;--border:#e0e0f0;--input:#f0f0f8}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);transition:background .3s,color .3s}
+button,input,textarea,select{font-family:inherit;font-size:15px;outline:none}
+.hidden{display:none!important}
+.green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}.muted{color:var(--muted)}
+.badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;margin-left:6px;background:var(--accent);color:#fff}
+.badge-red{background:var(--red)}
+.auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at top,#2d1b4e,var(--bg) 60%)}
+.auth-card{width:100%;max-width:400px;background:var(--card);border:1px solid var(--border);border-radius:22px;padding:28px 22px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.brand{text-align:center;margin-bottom:22px}.brand-logo{font-size:52px;line-height:1}
+.brand h1{margin:6px 0 4px;font-size:24px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.brand p{margin:0;color:var(--muted);font-size:13px}
+.auth-tabs{display:flex;background:var(--input);border-radius:12px;padding:4px;margin-bottom:18px}
+.auth-tab{flex:1;border:0;background:transparent;color:var(--muted);padding:10px;border-radius:9px;font-weight:600;cursor:pointer;transition:.2s}
+.auth-tab.active{background:var(--accent);color:#fff}
+.auth-form{display:flex;flex-direction:column;gap:11px}
+.auth-form input{background:var(--input);border:1px solid var(--border);color:var(--text);padding:13px 14px;border-radius:12px}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:0;padding:14px;border-radius:12px;font-weight:700;cursor:pointer;margin-top:6px;transition:transform .1s}
+.btn-primary:active{transform:scale(.97)}.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-secondary{background:var(--card2);color:var(--text);border:1px solid var(--border);padding:12px;border-radius:12px;font-weight:600;cursor:pointer}
+.btn-secondary.small{padding:7px 12px;font-size:13px}
+.btn-danger{background:var(--red);color:#fff;border:0;padding:12px;border-radius:12px;font-weight:700;cursor:pointer}
+.auth-error{color:var(--red);font-size:13px;text-align:center;margin-top:10px;min-height:18px}
+.auth-support{text-align:center;color:var(--muted);font-size:12px;margin-top:16px}
+.app-screen{min-height:100vh;padding-bottom:80px}
+.app-header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--card);border-bottom:1px solid var(--border)}
+.header-brand{font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.header-credits{font-size:13px;font-weight:700;color:var(--green)}
+.main-content{padding:16px;max-width:900px;margin:0 auto}
+.section-title{font-size:18px;margin:6px 0 14px}
+.loading{text-align:center;color:var(--muted);padding:40px 0}
+.empty{text-align:center;color:var(--muted);padding:50px 20px;font-size:15px}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.game-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px 14px;text-align:center;cursor:pointer;transition:transform .15s,border-color .2s}
+.game-card:active{transform:scale(.97);border-color:var(--accent)}
+.game-icon{font-size:42px}.game-name{font-weight:700;margin-top:6px}.game-count{color:var(--muted);font-size:12px;margin-top:3px}
+.back-btn{background:transparent;border:0;color:var(--accent2);font-weight:700;padding:6px 0;margin-bottom:10px;cursor:pointer;font-size:14px}
+.offers-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.offer-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 12px;text-align:center;cursor:pointer;transition:transform .15s,border-color .2s}
+.offer-card:active{transform:scale(.97);border-color:var(--accent)}
+.offer-diamonds{font-size:22px;font-weight:800;color:var(--accent2)}
+.offer-label{color:var(--muted);font-size:12px;margin:4px 0 8px}.offer-price{font-weight:700;color:var(--green)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;background:var(--card);border-top:1px solid var(--border);padding:6px 4px}
+.nav-btn{flex:1;border:0;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;padding:8px 0;cursor:pointer;border-radius:12px;transition:.2s}
+.nav-btn span{font-size:10px}.nav-btn.active{color:var(--accent2)}
+.orders-list{display:flex;flex-direction:column;gap:12px}
+.order-item{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px}
+.order-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.status{font-size:11px;font-weight:800;padding:3px 9px;border-radius:99px;background:var(--input)}
+.status.green{background:rgba(34,197,94,.15)}.status.red{background:rgba(239,68,68,.15)}.status.yellow{background:rgba(245,158,11,.15)}
+.order-body{font-size:13px;display:flex;flex-direction:column;gap:3px;margin-bottom:8px}
+.order-price{font-weight:700;color:var(--green);margin-bottom:8px}
+.account-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px}
+.account-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)}
+.account-row:last-child{border:0}.account-actions{display:flex;flex-direction:column;gap:10px}
+.support-note{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
+.notice-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:12px}
+.notice-item h4{margin:0 0 6px;color:var(--accent2)}.notice-item p{margin:0;color:var(--muted);font-size:13px;white-space:pre-wrap}
+.notice-date{font-size:11px;color:var(--muted);margin-top:8px}
+.admin-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+.admin-tab{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:8px 14px;border-radius:99px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.admin-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.admin-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px}
+.admin-item-info{display:flex;flex-direction:column;gap:3px;margin-bottom:10px;font-size:13px}
+.admin-item-actions{display:flex;gap:8px;flex-wrap:wrap}
+.admin-item-actions button{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer}
+.admin-form{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.admin-form input,.admin-form select,.admin-form textarea{background:var(--input);border:1px solid var(--border);color:var(--text);padding:11px;border-radius:10px}
+.modal{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s}
+.modal-content{background:var(--card);width:100%;max-width:520px;border-radius:22px 22px 0 0;padding:22px;border:1px solid var(--border);animation:slideUp .25s}
+.modal-content h3{margin:0 0 14px}.modal-content input,.modal-content select{width:100%;background:var(--input);border:1px solid var(--border);color:var(--text);padding:12px;border-radius:11px;margin-bottom:10px}
+.modal-actions{display:flex;gap:10px;margin-top:8px}.modal-actions button{flex:1}
+.pay-opt{display:flex;gap:8px;margin-bottom:10px}
+.pay-opt label{flex:1;background:var(--input);border:1px solid var(--border);padding:12px;border-radius:11px;text-align:center;cursor:pointer;font-size:13px;font-weight:600}
+.pay-opt input{display:none}.pay-opt label:has(input:checked){border-color:var(--accent);background:rgba(139,92,246,.12);color:var(--accent2)}
+.wallet-box{background:var(--input);border:1px dashed var(--border);padding:12px;border-radius:11px;font-size:12px;word-break:break-all;margin-bottom:10px}
+.wallet-box strong{color:var(--accent2);display:block;margin-bottom:4px;font-size:11px}
+.order-overlay{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .3s;overflow-y:auto}
+.overlay-inner{width:100%;max-width:420px;text-align:center}
+.circuit-container{position:relative;width:200px;height:200px;margin:0 auto 14px}
+.circuit-svg{width:100%;height:100%;animation:spinSlow 30s linear infinite}
+.c-track{fill:none;stroke:var(--border);stroke-width:1}
+.c-track2{fill:none;stroke:var(--accent);stroke-width:1;opacity:.4;stroke-dasharray:4 8;animation:dash 3s linear infinite}
+.c-path{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:8 6;animation:dash 1.4s linear infinite;opacity:.85}
+.c-node{fill:var(--accent2);animation:pulse 1.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spinSlow{to{transform:rotate(360deg)}}@keyframes dash{to{stroke-dashoffset:-28}}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(.6)}50%{opacity:1;transform:scale(1.25)}}
+.overlay-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px}
+.overlay-status{font-size:26px;font-weight:800;margin:6px 0;letter-spacing:.5px;color:var(--accent2);transition:color .4s}
+.overlay-sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.overlay-details{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;text-align:left;margin-bottom:16px}
+.od-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.od-row:last-child{border:0}.od-row span{color:var(--muted)}
+.overlay-actions{display:flex;gap:10px}.overlay-actions button{flex:1}
+.order-overlay.accepted .c-path,.order-overlay.accepted .c-track2{stroke:var(--green)}
+.order-overlay.accepted .c-node{fill:var(--green)}.order-overlay.accepted .overlay-status{color:var(--green)}
+.order-overlay.rejected .c-path,.order-overlay.rejected .c-track2{stroke:var(--red)}
+.order-overlay.rejected .c-node{fill:var(--red)}.order-overlay.rejected .overlay-status{color:var(--red)}
+.order-pill{position:fixed;bottom:76px;left:12px;right:12px;z-index:80;background:var(--card);border:1px solid var(--accent);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.order-pill.accepted{border-color:var(--green)}.order-pill.rejected{border-color:var(--red)}
+.pill-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);animation:pulse 1.4s ease-in-out infinite}
+.order-pill.accepted .pill-dot{background:var(--green);animation:none}
+.order-pill.rejected .pill-dot{background:var(--red);animation:none}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.toast{position:fixed;top:20px;left:50%;transform:translate(-50%,-80px);z-index:2000;background:var(--card);color:var(--text);padding:12px 20px;border-radius:12px;border:1px solid var(--border);font-size:14px;font-weight:600;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{transform:translate(-50%,0);opacity:1}.toast.error{border-color:var(--red)}.toast.success{border-color:var(--green)}
+</style>
+</head>
+<body>
+
+<div id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="brand"><div class="brand-logo">💎</div><h1>Diamantes_Res</h1><p>Recargas al instante</p></div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">Iniciar sesión</button>
+      <button class="auth-tab" data-tab="register">Crear cuenta</button>
+    </div>
+    <form id="loginForm" class="auth-form">
+      <input type="email" id="loginEmail" placeholder="Correo" required>
+      <input type="password" id="loginPassword" placeholder="Contraseña" required>
+      <button type="submit" class="btn-primary">Entrar</button>
+    </form>
+    <form id="registerForm" class="auth-form hidden">
+      <input type="text" id="regName" placeholder="Nombre" required>
+      <input type="tel" id="regPhone" placeholder="Número de teléfono" required>
+      <input type="email" id="regEmail" placeholder="Correo" required>
+      <input type="password" id="regPassword" placeholder="Contraseña (mín. 4)" required>
+      <button type="submit" class="btn-primary">Crear cuenta</button>
+    </form>
+    <div id="authError" class="auth-error"></div>
+    <div class="auth-support">Soporte: 59369816</div>
+  </div>
+</div>
+
+<div id="appScreen" class="app-screen hidden">
+  <header class="app-header">
+    <div class="header-brand">💎 Diamantes_Res</div>
+    <div class="header-credits">💰 <span id="headerCredits">0.00</span> USDT</div>
+  </header>
+  <main id="mainContent" class="main-content"></main>
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-view="principal">🏠<span>Principal</span></button>
+    <button class="nav-btn" data-view="pedidos">📦<span>Pedidos</span></button>
+    <button class="nav-btn" data-view="cuenta">👤<span>Cuenta</span></button>
+    <button class="nav-btn" data-view="avisos">📢<span>Avisos</span></button>
+    <button class="nav-btn hidden" id="navAdmin" data-view="admin">⚙️<span>Admin</span></button>
+  </nav>
+</div>
+
+<div id="offerModal" class="modal hidden"><div class="modal-content"><h3 id="modalTitle">Comprar</h3><div id="modalBody"></div></div></div>
+
+<div id="orderOverlay" class="order-overlay hidden">
+  <div class="overlay-inner">
+    <div class="circuit-container">
+      <svg viewBox="0 0 240 240" class="circuit-svg">
+        <circle cx="120" cy="120" r="112" class="c-track"/><circle cx="120" cy="120" r="92" class="c-track2"/>
+        <path d="M120,8 L120,48 L80,48 L80,80" class="c-path"/><path d="M232,120 L192,120 L192,160 L160,160" class="c-path"/>
+        <path d="M120,232 L120,192 L160,192 L160,160" class="c-path"/><path d="M8,120 L48,120 L48,80 L80,80" class="c-path"/>
+        <circle cx="80" cy="80" r="5" class="c-node"/><circle cx="160" cy="160" r="5" class="c-node"/>
+        <circle cx="120" cy="48" r="4" class="c-node" style="animation-delay:.3s"/><circle cx="192" cy="120" r="4" class="c-node" style="animation-delay:.6s"/>
+        <circle cx="48" cy="120" r="4" class="c-node" style="animation-delay:.9s"/><circle cx="120" cy="192" r="4" class="c-node" style="animation-delay:1.2s"/>
+      </svg>
+      <div class="overlay-icon" id="overlayIcon">⏳</div>
+    </div>
+    <h2 class="overlay-status" id="overlayStatus">Proceso</h2>
+    <p class="overlay-sub" id="overlaySub">Procesando pedido...</p>
+    <div class="overlay-details" id="overlayDetails"></div>
+    <div class="overlay-actions" id="overlayActions"></div>
+  </div>
+</div>
+
+<div id="orderPill" class="order-pill hidden" onclick="restoreOrder()"><span class="pill-dot"></span><span id="pillText">Pedido</span></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const state = { user: null, theme: localStorage.getItem('theme') || 'dark', currentView: 'principal', currentGame: null, offers: [], config: {}, activeOrder: null, pollTimer: null, pendingOffer: null, adminTab: 'clientes' };
+document.documentElement.setAttribute('data-theme', state.theme);
+
+async function api(path, method = 'GET', body) {
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(path, opts);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || 'Error en el servidor');
+  return data;
+}
+function toast(msg, type = 'info') { const t = $('toast'); t.textContent = msg; t.className = 'toast show ' + type; clearTimeout(t._t); t._t = setTimeout(() => t.className = 'toast', 2800); }
+const escapeHtml = s => !s ? '' : String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// Auth
+document.querySelectorAll('.auth-tab').forEach(tab => tab.onclick = () => {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active')); tab.classList.add('active');
+  const isLogin = tab.dataset.tab === 'login';
+  $('loginForm').classList.toggle('hidden', !isLogin); $('registerForm').classList.toggle('hidden', isLogin); $('authError').textContent = '';
+});
+$('loginForm').onsubmit = async e => { e.preventDefault(); try { const d = await api('/api/login','POST',{email:$('loginEmail').value,password:$('loginPassword').value}); state.user=d.user; enterApp(); } catch(err){ $('authError').textContent = err.message; } };
+$('registerForm').onsubmit = async e => { e.preventDefault(); try { const d = await api('/api/register','POST',{name:$('regName').value,phone:$('regPhone').value,email:$('regEmail').value,password:$('regPassword').value}); state.user=d.user; enterApp(); } catch(err){ $('authError').textContent = err.message; } };
+
+function enterApp() { $('authScreen').classList.add('hidden'); $('appScreen').classList.remove('hidden'); $('headerCredits').textContent = Number(state.user.credits).toFixed(2); $('navAdmin').classList.toggle('hidden', !state.user.isAdmin); showView('principal'); }
+document.querySelectorAll('.nav-btn').forEach(btn => btn.onclick = () => { if(btn.dataset.view==='admin' && !state.user.isAdmin) return; showView(btn.dataset.view); });
+function showView(v) { state.currentView=v; document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view===v)); if(v==='principal'){state.currentGame=null;renderPrincipal();} else if(v==='pedidos') renderPedidos(); else if(v==='cuenta') renderCuenta(); else if(v==='avisos') renderAvisos(); else if(v==='admin') renderAdmin(); }
+
+// Principal
+async function renderPrincipal() {
+  $('mainContent').innerHTML = '<div class="loading">Cargando...</div>';
+  try {
+    const d = await api('/api/offers'); state.offers = d.games;
+    if(state.currentGame) return renderGameOffers();
+    if(!d.games.length) return $('mainContent').innerHTML = '<div class="empty">🎮<p>No hay juegos disponibles</p></div>';
+    let h = '<h2 class="section-title">Juegos disponibles</h2><div class="games-grid">';
+    d.games.forEach(g => h += `<div class="game-card" data-game="${escapeHtml(g.name)}"><div class="game-icon">🔥</div><div class="game-name">${escapeHtml(g.name)}</div><div class="game-count">${g.offers.length} ofertas</div></div>`);
+    $('mainContent').innerHTML = h + '</div>';
+    document.querySelectorAll('.game-card').forEach(el => el.onclick = () => { state.currentGame = el.dataset.game; renderGameOffers(); });
+  } catch(e) { $('mainContent').innerHTML = '<div class="empty">Error: ' + e.message + '</div>'; }
+}
+function renderGameOffers() {
+  const g = state.offers.find(x => x.name === state.currentGame); if(!g) return renderPrincipal();
+  let h = `<button class="back-btn" onclick="state.currentGame=null;renderPrincipal()">← Volver</button><h2 class="section-title">${escapeHtml(g.name)}</h2><div class="offers-list">`;
+  g.offers.forEach(o => h += `<div class="offer-card" onclick="openOfferModal(${o.id})"><div class="offer-diamonds">💎 ${o.diamonds}</div><div class="offer-label">${escapeHtml(o.label)}</div><div class="offer-price">${Number(o.price).toFixed(2)} USDT</div></div>`);
+  $('mainContent').innerHTML = h + '</div>';
+}
+
+// Modal
+function openOfferModal(offerId) {
+  const g = state.offers.find(x => x.name === state.currentGame); const o = g.offers.find(x => x.id === offerId); if(!o) return;
+  state.pendingOffer = o; $('modalTitle').textContent = o.label + ' · ' + Number(o.price).toFixed(2) + ' USDT';
+  $('modalBody').innerHTML = `<input type="text" id="playerIdInput" placeholder="ID del jugador (Free Fire)" autocomplete="off">
+    <div class="pay-opt"><label><input type="radio" name="paym" value="usdt" checked><span>💵 USDT</span></label><label><input type="radio" name="paym" value="credits"><span>💰 Créditos (${Number(state.user.credits).toFixed(2)})</span></label></div>
+    <div class="wallet-box"><strong>Dirección USDT:</strong>${escapeHtml(state.config.usdtWallet)}</div>
+    <div class="modal-actions"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="confirmOrder()">Confirmar pedido</button></div>`;
+  $('offerModal').classList.remove('hidden');
+}
+function closeModal() { $('offerModal').classList.add('hidden'); state.pendingOffer = null; }
+
+async function confirmOrder() {
+  if(!state.pendingOffer) return; const pid = ($('playerIdInput').value || '').trim(); if(!pid) return toast('Ingresa el ID','error');
+  const btn = document.querySelector('.modal-actions .btn-primary'); btn.textContent = 'Procesando...'; btn.disabled = true;
+  try {
+    const d = await api('/api/fzr/order','POST',{ offerId:state.pendingOffer.id, playerId:pid, price:state.pendingOffer.price, method:document.querySelector('input[name="paym"]:checked').value, label:state.pendingOffer.label });
+    state.user = d.user; $('headerCredits').textContent = Number(state.user.credits).toFixed(2);
+    closeModal(); openOrderOverlay(d.order); startPolling(d.order.id);
+  } catch(e) { toast(e.message,'error'); btn.textContent = 'Confirmar pedido'; btn.disabled = false; }
+}
+
+// Overlay
+function openOrderOverlay(order) { state.activeOrder = order; $('orderOverlay').classList.remove('hidden'); $('orderPill').classList.add('hidden'); updateOrderUI(order); }
+function minimizeOrder() { $('orderOverlay').classList.add('hidden'); $('orderPill').classList.remove('hidden'); }
+function restoreOrder() { $('orderOverlay').classList.remove('hidden'); $('orderPill').classList.add('hidden'); }
+function closeOrder() { if(state.pollTimer){clearTimeout(state.pollTimer);state.pollTimer=null;} state.activeOrder=null; $('orderOverlay').classList.add('hidden'); $('orderPill').classList.add('hidden'); if(state.currentView==='pedidos') renderPedidos(); }
+
+function updateOrderUI(order) {
+  state.activeOrder = order; const overlay = $('orderOverlay'); const pill = $('orderPill');
+  overlay.className = 'order-overlay ' + order.status; pill.className = 'order-pill ' + order.status;
+  const statusTxt = order.status==='accepted'?'Aceptado':order.status==='rejected'?'Rechazado':'Proceso';
+  $('pillText').textContent = 'Pedido #' + order.id + ' · ' + statusTxt;
+  if(order.status === 'pending') {
+    $('overlayStatus').textContent='Proceso'; $('overlaySub').textContent='Tu pedido está siendo procesado...'; $('overlayIcon').textContent='⏳';
+    $('overlayActions').innerHTML='<button class="btn-secondary" onclick="minimizeOrder()">Minimizar</button>';
+  } else if(order.status === 'accepted') {
+    $('overlayStatus').textContent='Aceptado'; $('overlaySub').textContent='¡Diamantes entregados!'; $('overlayIcon').textContent='✅';
+    $('overlayActions').innerHTML='<button class="btn-primary" onclick="closeOrder()">Cerrar</button>';
+  } else {
+    $('overlayStatus').textContent='Rechazado'; $('overlaySub').textContent='Soporte: 59369816'; $('overlayIcon').textContent='❌';
+    $('overlayActions').innerHTML='<button class="btn-primary" onclick="closeOrder()">Cerrar</button>';
+  }
+  $('overlayDetails').innerHTML = `<div class="od-row"><span>Pedido</span><strong>#${order.id}</strong></div><div class="od-row"><span>Juego</span><strong>${escapeHtml(order.game)}</strong></div><div class="od-row"><span>Paquete</span><strong>${escapeHtml(order.label)}</strong></div><div class="od-row"><span>ID Jugador</span><strong>${escapeHtml(order.playerId)}</strong></div><div class="od-row"><span>Precio</span><strong>${Number(order.price).toFixed(2)} USDT</strong></div>`;
+}
+function startPolling(orderId) {
+  if(state.pollTimer) clearTimeout(state.pollTimer);
+  const tick = async () => { try { const d = await api('/api/orders/'+orderId); updateOrderUI(d.order); if(d.order.status==='pending') state.pollTimer = setTimeout(tick, 2000); } catch(e) { state.pollTimer = setTimeout(tick, 3000); } };
+  tick();
+}
+async function viewOrder(id) { try { const d = await api('/api/orders/'+id); openOrderOverlay(d.order); if(d.order.status==='pending') startPolling(id); } catch(e) { toast(e.message,'error'); } }
+
+// Pedidos
+async function renderPedidos() {
+  $('mainContent').innerHTML = '<div class="loading">Cargando...</div>';
+  try {
+    const d = await api('/api/orders'); if(!d.orders.length) return $('mainContent').innerHTML = '<div class="empty">📦<p>No tienes pedidos aún</p></div>';
+    let h = '<h2 class="section-title">Mis pedidos</h2><div class="orders-list">';
+    d.orders.forEach(o => {
+      const cls = o.status==='accepted'?'green':o.status==='rejected'?'red':'yellow';
+      const txt = o.status==='accepted'?'Aceptado':o.status==='rejected'?'Rechazado':'En proceso';
+      h += `<div class="order-item"><div class="order-top"><strong>#${o.id} · ${escapeHtml(o.game)}</strong><span class="status ${cls}">${txt}</span></div><div class="order-body"><div>${escapeHtml(o.label)}</div><div class="muted">ID: ${escapeHtml(o.playerId)}</div></div><div class="order-price">${Number(o.price).toFixed(2)} USDT</div><button class="btn-secondary small" onclick="viewOrder(${o.id})">Ver estado</button></div>`;
+    });
+    $('mainContent').innerHTML = h + '</div>';
+  } catch(e) { $('mainContent').innerHTML = '<div class="empty">Error: '+e.message+'</div>'; }
+}
+
+// Cuenta
+function renderCuenta() {
+  const u = state.user;
+  $('mainContent').innerHTML = `<h2 class="section-title">Mi cuenta</h2>
+    <div class="account-card"><div class="account-row"><span>Nombre</span><strong>${escapeHtml(u.name)}</strong></div><div class="account-row"><span>Correo</span><strong>${escapeHtml(u.email)}</strong></div><div class="account-row"><span>Créditos</span><strong class="green">${Number(u.credits).toFixed(2)} USDT</strong></div></div>
+    <div class="account-actions"><button class="btn-secondary" onclick="toggleTheme()">${state.theme==='dark'?'☀️ Tema claro':'🌙 Tema oscuro'}</button><button class="btn-secondary" onclick="showChangePwd()">🔒 Cambiar contraseña</button>${u.isAdmin?'<button class="btn-secondary" onclick="showView(\'admin\')">⚙️ Panel de admin</button>':''}<button class="btn-danger" onclick="doLogout()">Cerrar sesión</button></div>
+    <div class="support-note">Soporte: 59369816</div>`;
+}
+function toggleTheme() { state.theme = state.theme==='dark'?'light':'dark'; localStorage.setItem('theme', state.theme); document.documentElement.setAttribute('data-theme', state.theme); renderCuenta(); }
+function showChangePwd() { $('modalTitle').textContent='Cambiar contraseña'; $('modalBody').innerHTML=`<input type="password" id="pwdCurrent" placeholder="Actual"><input type="password" id="pwdNew" placeholder="Nueva"><div class="modal-actions"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="submitPwd()">Guardar</button></div>`; $('offerModal').classList.remove('hidden'); }
+async function submitPwd() { try { await api('/api/change-password','POST',{current:$('pwdCurrent').value,new:$('pwdNew').value}); closeModal(); toast('Contraseña actualizada','success'); } catch(e) { toast(e.message,'error'); } }
+async function doLogout() { try { await api('/api/logout','POST'); } catch(e){} state.user=null; $('appScreen').classList.add('hidden'); $('authScreen').classList.remove('hidden'); }
+
+// Avisos
+async function renderAvisos() {
+  $('mainContent').innerHTML = '<div class="loading">Cargando...</div>';
+  try {
+    const d = await api('/api/notices'); if(!d.notices.length) return $('mainContent').innerHTML = '<div class="empty">📢<p>Sin avisos</p></div>';
+    let h = '<h2 class="section-title">Avisos</h2>';
+    d.notices.forEach(n => h += `<div class="notice-item"><h4>${escapeHtml(n.title)}</h4><p>${escapeHtml(n.content)}</p><div class="notice-date">${new Date(n.createdAt).toLocaleString()}</div></div>`);
+    $('mainContent').innerHTML = h;
+  } catch(e) { $('mainContent').innerHTML = '<div class="empty">Error: '+e.message+'</div>'; }
+}
+
+// Admin
+function renderAdmin() {
+  if(!state.user || !state.user.isAdmin) return;
+  const tabs = ['clientes','pedidos','creditos','avisos','config'];
+  let h = '<h2 class="section-title">⚙️ Panel Admin</h2><div class="admin-tabs">';
+  tabs.forEach(t => h += `<button class="admin-tab ${state.adminTab===t?'active':''}" onclick="setAdminTab('${t}')">${t.toUpperCase()}</button>`);
+  $('mainContent').innerHTML = h + '</div><div id="adminContent"><div class="loading">Cargando...</div></div>'; renderAdminTab();
+}
+function setAdminTab(t) { state.adminTab=t; renderAdmin(); }
+async function renderAdminTab() {
+  const c = $('adminContent'); if(!c) return;
+  try {
+    if(state.adminTab==='clientes') {
+      const d = await api('/api/admin/clients'); let h = '';
+      d.clients.forEach(u => h += `<div class="admin-item"><div class="admin-item-info"><strong>${escapeHtml(u.name)} ${u.isAdmin?'<span class="badge">ADMIN</span>':''}${u.isBanned?'<span class="badge badge-red">BANEADO</span>':''}</strong><span>${escapeHtml(u.email)}</span><span class="green">${Number(u.credits).toFixed(2)} USDT</span></div><div class="admin-item-actions"><button onclick="adminSet('${u.id}','admin',${u.isAdmin?0:1})">${u.isAdmin?'Quitar admin':'Hacer admin'}</button><button onclick="adminSet('${u.id}','ban',${u.isBanned?0:1})">${u.isBanned?'Desbanear':'Banear'}</button></div></div>`);
+      c.innerHTML = h;
+    } else if(state.adminTab==='pedidos') {
+      const d = await api('/api/admin/orders'); let h = '';
+      d.orders.forEach(o => { const cls=o.status==='accepted'?'green':o.status==='rejected'?'red':'yellow'; h += `<div class="admin-item"><div class="admin-item-info"><strong>#${o.id} · ${escapeHtml(o.userEmail)} <span class="status ${cls}">${o.status}</span></strong><span>${escapeHtml(o.label)} - ID: ${escapeHtml(o.playerId)}</span><span class="green">${Number(o.price).toFixed(2)} USDT</span></div>${o.status==='pending'?`<div class="admin-item-actions"><button style="color:green" onclick="adminOrder(${o.id},'accept')">Aceptar</button><button style="color:red" onclick="adminOrder(${o.id},'reject')">Rechazar</button></div>`:''}</div>`; });
+      c.innerHTML = h || '<div class="empty">Sin pedidos</div>';
+    } else if(state.adminTab==='creditos') {
+      c.innerHTML = `<div class="admin-form"><input type="email" id="credEmail" placeholder="Correo"><input type="number" id="credAmount" placeholder="Monto"><div class="row"><button class="btn-primary" onclick="adminCred('add')">Añadir</button><button class="btn-danger" onclick="adminCred('remove')">Quitar</button></div></div>`;
+    } else if(state.adminTab==='avisos') {
+      const d = await api('/api/admin/notices'); let h = `<div class="admin-form"><input type="text" id="notTitle" placeholder="Título"><textarea id="notContent" placeholder="Mensaje"></textarea><button class="btn-primary" onclick="adminAddNotice()">Publicar</button></div>`;
+      d.notices.forEach(n => h += `<div class="admin-item"><div class="admin-item-info"><strong>${escapeHtml(n.title)}</strong><span class="muted">${escapeHtml(n.content)}</span></div><div class="admin-item-actions"><button style="color:red" onclick="adminDelNotice(${n.id})">Eliminar</button></div></div>`);
+      c.innerHTML = h;
+    } else if(state.adminTab==='config') {
+      const d = await api('/api/admin/config'); c.innerHTML = `<div class="admin-form"><label>Dirección USDT:</label><input type="text" id="cfgWallet" value="${escapeHtml(d.usdtWallet)}"><button class="btn-primary" onclick="adminSaveWallet()">Guardar</button></div>`;
+    }
+  } catch(e) { c.innerHTML = '<div class="empty">Error: '+e.message+'</div>'; }
+}
+async function adminSet(id, type, val) { try { await api('/api/admin/clients/'+id+'/'+type,'POST',{value:val}); renderAdminTab(); toast('Actualizado','success'); } catch(e){ toast(e.message,'error'); } }
+async function adminOrder(id, action) { try { await api('/api/admin/orders/'+id+'/'+action,'POST'); renderAdminTab(); toast('Pedido '+action,'success'); } catch(e){ toast(e.message,'error'); } }
+async function adminCred(action) { try { const d = await api('/api/admin/credits','POST',{email:$('credEmail').value,amount:$('credAmount').value,action}); toast('OK: '+d.client.credits,'success'); renderAdminTab(); } catch(e){ toast(e.message,'error'); } }
+async function adminAddNotice() { try { await api('/api/admin/notices','POST',{title:$('notTitle').value,content:$('notContent').value}); toast('Publicado','success'); renderAdminTab(); } catch(e){ toast(e.message,'error'); } }
+async function adminDelNotice(id) { try { await api('/api/admin/notices/'+id,'DELETE'); toast('Eliminado','success'); renderAdminTab(); } catch(e){ toast(e.message,'error'); } }
+async function adminSaveWallet() { try { await api('/api/admin/config','POST',{usdtWallet:$('cfgWallet').value}); state.config.usdtWallet=$('cfgWallet').value; toast('Guardado','success'); } catch(e){ toast(e.message,'error'); } }
+
+// Init
+(async function() { try { state.config = await api('/api/config'); } catch(e){} try { const d = await api('/api/me'); state.user=d.user; enterApp(); } catch(e){} })();
+</script>
+</body>
+  </html>
