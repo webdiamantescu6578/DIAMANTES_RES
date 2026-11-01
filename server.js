@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -6,7 +5,6 @@ const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 9050;
-// ESTA ES LA LÍNEA MÁGICA: Usar /tmp evita el error de permisos en la nube
 const FILE = path.join('/tmp', 'data.json'); 
 
 app.use(express.json());
@@ -15,11 +13,11 @@ app.use(express.static(__dirname));
 function defaultData() {
   return {
     users: [{
-      name: 'Administrador', phone: '56386964', email: 'admin1234@gmail.com',
+      name: 'Administrador', phone: '56386964', email: 'anthonu680@gmail.com',
       password: 'admin1234', credits: 0, isAdmin: true, banned: false
     }],
     orders: [],
-    notices: [{ id: 'n1', text: '¡Bienvenido a KAREL_Diamantes! Soporte: 56386964', date: new Date().toISOString() }],
+    notices: [{ id: 'n1', text: '¡Bienvenido a Diamantes Res! Soporte: 59369816', date: new Date().toISOString() }],
     offers: {
       freefire: {
         name: 'Free Fire', emoji: '🔥',
@@ -267,4 +265,4 @@ app.post('/api/admin/notices', auth, adminOnly, (req, res) => {
   data.notices = req.body.notices; save(); res.json({ ok: true });
 });
 
-app.listen(PORT, '0.0.0.0', () => console.log('Diamantes_Res → http://localhost:' + PORT));
+app.listen(PORT, '0.0.0.0', () => console.log('Diamantes Res → http://localhost:' + PORT));
