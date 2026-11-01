@@ -8,7 +8,7 @@ const app = express();
 const PORT = 9080;
 const ADMIN_EMAIL = 'anthonu680@gmail.com';
 const ADMIN_PASSWORD = 'admin123'; // Cámbiala luego en la web
-const DB_FILE = path.join(__dirname, 'db.json');
+const FILE = path.join('/tmp', 'data.json');
 
 // 🔑 TU API KEY DE FZR CARDS (Usa variable de entorno o esta por defecto)
 const FZR_API_KEY = process.env.FZR_API_KEY || 'fc_58efaa3b6c0131a173eef853'; 
